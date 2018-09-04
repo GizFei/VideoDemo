@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">VideoDemo</string>
+    <string name="declaration">一些小说明（毕竟只是个Demo）：\n
+    1、全屏状态下滑动屏幕可以调节音量和亮度。刚进入全屏时调节会不太灵敏，滑动几下后可以顺畅调节。\n
+    2、全屏或半屏状态点击播放器可以隐藏控制器。\n
+    3、拖动时间条可以调节视频帧位置，拖动时可以查看时间刻度。</string>
+</resources>

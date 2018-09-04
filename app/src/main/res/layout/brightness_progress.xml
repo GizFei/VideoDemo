@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_marginTop="50dp"
+    android:padding="10dp"
+    android:background="#b485dddd">
+
+    <ImageView
+        android:id="@+id/operation_bg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_light"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_gravity="bottom|center_horizontal">
+
+        <SeekBar
+            android:id="@+id/brightness_progress_bar"
+            android:layout_width="100dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="6dp"
+            android:max="100"
+            android:progress="40"
+            android:indeterminate="false"
+            android:thumb="@null"
+            android:progressDrawable="@drawable/seekbar_style2" />
+
+    </FrameLayout>
+
+
+</FrameLayout>
