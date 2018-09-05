@@ -6,6 +6,8 @@
 
 关于WindowManager的操作不列出来了。
 
+[TOC]
+
 #### 读取手机存储的权限
 
 ```xml
