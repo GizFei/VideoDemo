@@ -1,8 +1,10 @@
 package com.giz.videodemo;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.media.AudioManager;
@@ -12,6 +14,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,15 +64,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+
+            }else{
+                ActivityCompat.requestPermissions(this, new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                }, 1);
+            }
+        }
+
         initUI();
         setPlayerEvent();
 
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                "/update/videoDemo.mp4";
-        // 本地视频播放
-        mVideoView.setVideoPath(path);
-        mVideoView.start();
-        UIHandler.sendEmptyMessage(UPDATE_UI);
+//        String path = Environment.getExternalStorageDirectory().getAbsolutePath() +
+//                "/update/videoDemo.mp4";
+          // 本地视频播放
+//        mVideoView.setVideoPath(path);
+//        mVideoView.start();
+//        UIHandler.sendEmptyMessage(UPDATE_UI);
 
 //        // 网络播放
 //        //mVideoView.setVideoURI(Uri.parse("https://www.imooc.com/video/14021"));
@@ -85,11 +101,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(resultCode == RESULT_OK){
             if(requestCode == REQUEST_VIDEO){
-                String completePath = data.getDataString();
-                int index = completePath.indexOf("external_files");
-                String path = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        completePath.substring(index + 14);
-                mVideoView.setVideoPath(path);
+                Uri uri = data.getData();
+
+                mVideoView.setVideoURI(uri);
                 mPauseImg.setImageResource(R.drawable.pause_btn_style);
                 mVideoView.start();
                 UIHandler.sendEmptyMessage(UPDATE_UI);
